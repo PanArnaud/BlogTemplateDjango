@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block head_title %}Catégories{% endblock %}
+
+{% block content %}
+    <h2>{% block title %}{{ category.title }}{% endblock %}</h2>
+    <p>
+        {% for post in posts|dictsort:"posted" %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post.title }} - {{ post.posted }}</a></li>
+        {% endfor %}
+    </p>
+    <a href="/" class="btn btn-default btn-xs">Retour à l'accueil</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+body{
+    padding-top: 70px;
+}
+.container {
+  width: auto;
+  max-width: 850px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}

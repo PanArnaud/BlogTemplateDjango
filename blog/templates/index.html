@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Bienvenue sur mon blog{% endblock %}
+
+{% block content %}
+    <div class="blog-header">
+        <h1 class="blog-title"><a href="#">Un blog de test au CIRAD</a></h1>
+        <p class="lead blog-description text-justify"">Stop. Stop! You keep saying that word - danger... danger! No and I have never used that word. I said things were complicated. And then you flew off the handle! </p>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+            {% for blog in blogs %}
+                <h2>{{ blog.title }}<small></br>Le {{ blog.posted.date }}, par {% block author %}{{ blog.author }}{% endblock %}</small></h2>
+                <h5><a href="{{ blog.category.get_absolute_url }}">{{ blog.category }}</a></h5>
+                <img src="{{ blog.photos.url }}" style="width:100%">
+                <br><br>
+                <p class="text-justify">
+                    {{ blog.body|linebreaksbr }}
+                </p>
+            {% endfor %}
+            <ul class="pager">
+                <span class="step-links">
+                    {% if blogs.has_previous %}
+                        <li><a href="?page{{ blogs.previous_page_number }}">Précédent</a></li>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+                    </span>
+
+                    {% if blogs.has_next %}
+                        <li><a href="?page={{ blogs.next_page_number }}">Suivant</a></li>
+                    {% endif %}
+                </span>
+            </ul>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <h2>Catégories</h2>
+            {% if categories %}
+                <ul>
+                    {% for category in categories|dictsort:"title" %}
+                        <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+                    {% endfor %}
+            </ul>
+            {% else %}
+                <p>Il n'y a aucune catégorie pour le moment.'</p>
+            {% endif %}
+
+            <h2>Articles</h2>
+            {% if posts %}
+                <ul>
+                {% for post in posts %}
+                    <li class="text-justify"><a href="{{ post.get_absolute_url }}">{{ post.title }} - {{ post.posted.date }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>Il n'y a aucun article pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

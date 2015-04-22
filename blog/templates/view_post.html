@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %}{{ post.title }}{% endblock %}<small> Le {{ post.posted.date }}, par {% block author %}{{ post.author }}{% endblock %}</small></h2>
+    <h5><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></h5>
+    <img src="{{ post.photos.url }}" height="340">
+    <p class="text-justify">
+        {{ post.body|linebreaksbr }}
+    </p>
+
+    <a href="{{ post.category.get_absolute_url }}" class="btn btn-default btn-xs">Articles dans {{ post.category.title }}</a>
+    <a href="/" class="btn btn-default btn-xs">Retour à l'accueil</a>
+{% endblock %}
