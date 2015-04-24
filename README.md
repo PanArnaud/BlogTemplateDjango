@@ -6,4 +6,5 @@ Obviously, edit settings.py to change database.
 
 The blog features a paging system. You can list articles selecting a category.
 
+
 Thank you !
